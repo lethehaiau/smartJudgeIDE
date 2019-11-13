@@ -1,0 +1,19 @@
+.error-maker {
+    position: absolute
+}
+
+.problem-editor {
+    display: flex;
+    flex-direction: column;
+}
+
+.problem-editor__window {
+    display: flex;
+}
+
+.problem-editor__actions {
+    background-color:#13222b;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}

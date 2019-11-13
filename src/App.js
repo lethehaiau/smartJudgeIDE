@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Editor from './components/Editor';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Editt <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -19,6 +20,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <div style={{flex: 50}}>
+        <Editor />
+      </div>
     </div>
   );
 }
