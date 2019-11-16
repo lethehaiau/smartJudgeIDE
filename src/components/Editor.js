@@ -3,12 +3,15 @@ import AceEditor from "react-ace";
 import Button from "@material-ui/core/Button";
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
+import { submitCode } from "../actions/index";
 
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 
 const Editor = () => {
-  const [sourceCode, setSourceCode] = useState("");
+  const [sourceCode, setSourceCode] = useState(
+    "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
+  );
   const submissionStatus = useSelector(state => state.submission_result.status);
   const dispatch = useDispatch();
   return (
@@ -35,15 +38,12 @@ const Editor = () => {
           color="primary"
           onClick={() => {
             console.log(sourceCode);
-            dispatch({
-              type: "SUBMIT_CODE",
-              submission_result: { status: "Accept" }
-            });
-            console.log(submissionStatus);
+            dispatch(submitCode(sourceCode));
           }}
         >
           Submit
         </Button>
+        <p style={{ color: "white" }}>{submissionStatus}</p>
       </div>
     </div>
   );
