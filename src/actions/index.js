@@ -18,7 +18,7 @@ export function submitCode(sourceCode) {
         console.log(result);
         dispatch({
           type: "SUBMIT_CODE",
-          submission_result: { status: result.status.description }
+          submission_result: { status: result.status.description, message: result.message }
         });
         return result;
       });
