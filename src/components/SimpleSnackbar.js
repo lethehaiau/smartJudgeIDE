@@ -1,7 +1,9 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import BuildIcon from '@material-ui/icons/Build';
 import Snackbar from "@material-ui/core/Snackbar";
+import "./SimpleSnackbar.css"
 
 const SimpleSnackbar = ({open, setOpen, message}) => {
   const handleClose = (event, reason) => {
@@ -24,13 +26,17 @@ const SimpleSnackbar = ({open, setOpen, message}) => {
       ContentProps={{
         'aria-describedby': 'message-id',
       }}
-    message={<span id="message-id">{message}</span>}
+      className="snack-bar"
+      message={
+      <span id="message-id" className="snack-bar-message" >
+        <BuildIcon color='secondary' />
+        {message}
+      </span>}
       action={[
         <IconButton
           key="close"
           aria-label="close"
           color="inherit"
-          // className={classes.close}
           onClick={handleClose}
         >
           <CloseIcon />

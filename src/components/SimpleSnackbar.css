@@ -1,0 +1,10 @@
+.snack-bar {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.snack-bar-message {
+  text-align: end;
+}
