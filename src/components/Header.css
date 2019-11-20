@@ -1,0 +1,14 @@
+.Header {
+  flex-grow: 1;
+  /* margin-bottom: 5px; */
+  position: relative;
+  z-index: 4;
+}
+
+.Header-menu-button {
+  margin-right: 5px;
+}
+
+.Header-title {
+  flex-grow: 1;
+}

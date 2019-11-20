@@ -1,27 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Editor from './components/Editor';
+import React from "react";
+import { useSelector } from "react-redux";
+import "./App.css";
+import Editor from "./components/Editor";
+import Header from "./components/Header";
+
 
 function App() {
+  const problem = useSelector(state => state.problem);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Editt <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div style={{flex: 50}}>
-        <Editor />
+      <Header />
+      <div className="App-body">
+        <div className="App-problem">
+          <h3>{problem.title}</h3>
+          <div dangerouslySetInnerHTML={{ __html: problem.desc }} />
+        </div>
+        <div style={{ flex: 50}}>
+          <Editor />
+        </div>
       </div>
     </div>
   );
