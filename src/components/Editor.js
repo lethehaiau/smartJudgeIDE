@@ -7,7 +7,8 @@ import { submitCode } from "../actions/index";
 import SimpleSnackbar from "./SimpleSnackbar";
 
 import "ace-builds/src-noconflict/mode-python";
-import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/theme-twilight";
 
 const Editor = () => {
   const [sourceCode, setSourceCode] = useState(
@@ -15,14 +16,16 @@ const Editor = () => {
   );
   const [open, setOpen] = useState(false);
   const submissionStatus = useSelector(state => state.submission_result.status);
-  const submissionMessage = useSelector(state => state.submission_result.message);
+  const submissionMessage = useSelector(
+    state => state.submission_result.message
+  );
   const dispatch = useDispatch();
   return (
     <div className="problem-editor">
       <AceEditor
         className="problem-editor__window"
         mode="python"
-        theme="solarized_dark"
+        theme="solarized_light"
         onLoad={() => {
           console.log("Editor Loaded Successful");
         }}
@@ -31,14 +34,14 @@ const Editor = () => {
         placeholder="This is a placeholder"
         showGutter={true}
         showPrintMargin={true}
-        height={"600px"}
+        height={"100%"}
         width={"undefined"}
         fontSize={18}
       />
       <div className="problem-editor__actions">
         <Button
           variant="contained"
-          color="primary"
+          color="inherit"
           onClick={() => {
             console.log(sourceCode);
             dispatch(submitCode(sourceCode));
@@ -50,7 +53,11 @@ const Editor = () => {
         </Button>
         <p style={{ color: "white" }}>{submissionStatus}</p>
       </div>
-      <SimpleSnackbar open={open} setOpen={setOpen} message={submissionMessage}/>
+      <SimpleSnackbar
+        open={open}
+        setOpen={setOpen}
+        message={submissionMessage}
+      />
     </div>
   );
 };

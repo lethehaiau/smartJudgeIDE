@@ -5,14 +5,19 @@
 .problem-editor {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 0;
+    padding-top: 15px;
+    background-color: #232323;
 }
 
 .problem-editor__window {
-    display: flex;
+    padding-top: 5px;
 }
 
 .problem-editor__actions {
-    background-color:#13222b;
+    background-color:#232323;
     padding: 1rem;
     display: flex;
     justify-content: flex-end;
