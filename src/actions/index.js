@@ -9,8 +9,9 @@ export function submitCode(sourceCode) {
       body: JSON.stringify({
         source_code: sourceCode,
         language_id: "35",
-        command_line_arguments: "[4.5]",
-        expected_output: "[0.0]"
+        problem_id: 1,
+        // command_line_arguments: "[[[4.5]]]",
+        // expected_output: "[0.0]"
       })
     })
       .then(response => response.json())

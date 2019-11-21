@@ -1,37 +1,37 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import BuildIcon from '@material-ui/icons/Build';
+import BuildIcon from "@material-ui/icons/Build";
 import Snackbar from "@material-ui/core/Snackbar";
-import "./SimpleSnackbar.css"
+import "./SimpleSnackbar.css";
 
-const SimpleSnackbar = ({open, setOpen, message}) => {
+const SimpleSnackbar = ({ open, onClose, message }) => {
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
-
-    setOpen(false);
+    onClose();
   };
 
   return (
     <Snackbar
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
+        vertical: "bottom",
+        horizontal: "right"
       }}
-      open={open && !(!message)}
-      autoHideDuration={6000}
+      open={open && !!message}
+      // autoHideDuration={6000}
       onClose={handleClose}
       ContentProps={{
-        'aria-describedby': 'message-id',
+        "aria-describedby": "message-id"
       }}
       className="snack-bar"
       message={
-      <span id="message-id" className="snack-bar-message" >
-        <BuildIcon color='secondary' />
-        {message}
-      </span>}
+        <span id="message-id" className="snack-bar-message">
+          <BuildIcon color="secondary" />
+          {message}
+        </span>
+      }
       action={[
         <IconButton
           key="close"
@@ -40,10 +40,10 @@ const SimpleSnackbar = ({open, setOpen, message}) => {
           onClick={handleClose}
         >
           <CloseIcon />
-        </IconButton>,
+        </IconButton>
       ]}
     />
-  )
-}
+  );
+};
 
 export default SimpleSnackbar;

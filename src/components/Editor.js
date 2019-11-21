@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AceEditor from "react-ace";
 import Button from "@material-ui/core/Button";
+import Typography from '@material-ui/core/Typography';
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
 import { submitCode } from "../actions/index";
@@ -15,11 +16,19 @@ const Editor = () => {
     "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
   );
   const [open, setOpen] = useState(false);
+  const submissionResult = useSelector(state => state.submission_result);
   const submissionStatus = useSelector(state => state.submission_result.status);
-  const submissionMessage = useSelector(
-    state => state.submission_result.message
-  );
+  const [activeMessage, setActiveMessage] = useState();
+  const handleClose = () => {
+    setOpen(false);
+    setTimeout(() => setActiveMessage(""), 500);
+  };
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setActiveMessage(submissionResult.message);
+  }, [submissionResult]);
+
   return (
     <div className="problem-editor">
       <AceEditor
@@ -39,25 +48,21 @@ const Editor = () => {
         fontSize={18}
       />
       <div className="problem-editor__actions">
+        <Typography variant="button" className={"Submission-status " + submissionStatus}  style={{marginRight: 'auto'}}>{submissionStatus}</Typography>
         <Button
           variant="contained"
           color="inherit"
+          size="large"
           onClick={() => {
             console.log(sourceCode);
             dispatch(submitCode(sourceCode));
             setOpen(true);
-            console.log(submissionMessage);
           }}
         >
           Submit
         </Button>
-        <p style={{ color: "white" }}>{submissionStatus}</p>
       </div>
-      <SimpleSnackbar
-        open={open}
-        setOpen={setOpen}
-        message={submissionMessage}
-      />
+      <SimpleSnackbar open={open} onClose={handleClose} message={activeMessage} />
     </div>
   );
 };

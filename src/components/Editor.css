@@ -22,3 +22,16 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.Submission-status {
+    align-self: center;
+    color: white;
+}
+
+.Accepted {
+    color: #06D6A0;
+}
+
+.Wrong {
+    color: #EF476F;
+}
