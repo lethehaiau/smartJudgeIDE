@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import AceEditor from "react-ace";
 import Button from "@material-ui/core/Button";
 import Typography from '@material-ui/core/Typography';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import "./Editor.css";
 import { useSelector, useDispatch } from "react-redux";
 import { submitCode } from "../actions/index";
@@ -16,6 +19,7 @@ const Editor = () => {
     "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
   );
   const [open, setOpen] = useState(false);
+  const [openCustomInput, setOpenCustomInput] = useState(false);
   const submissionResult = useSelector(state => state.submission_result);
   const submissionStatus = useSelector(state => state.submission_result.status);
   const [activeMessage, setActiveMessage] = useState();
@@ -48,7 +52,17 @@ const Editor = () => {
         fontSize={18}
       />
       <div className="problem-editor__actions">
-        <Typography variant="button" className={"Submission-status " + submissionStatus}  style={{marginRight: 'auto'}}>{submissionStatus}</Typography>
+        <Typography variant="inherit" className={"Submission-status " + submissionStatus}  style={{marginRight: 'auto'}}>{submissionStatus}</Typography>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Switch checked={openCustomInput} onChange={(event) => setOpenCustomInput(event.target.checked)} value="openCustomInput" />
+            }
+            label="Custom Input"
+            labelPlacement="start"
+            style={{color:'white', marginRight:'5px'}}
+          />
+        </FormGroup>
         <Button
           variant="contained"
           color="inherit"
