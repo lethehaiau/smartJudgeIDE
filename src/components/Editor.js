@@ -11,6 +11,7 @@ import { submitCode } from "../actions/index";
 import SimpleSnackbar from "./SimpleSnackbar";
 
 import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/mode-text";
 import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-twilight";
 
@@ -51,6 +52,46 @@ const Editor = () => {
         width={"undefined"}
         fontSize={18}
       />
+      <div className={"Custom-test-section " + (!openCustomInput && "hide")}>
+        <div className="Custom-test-titlebar">
+          <Typography variant="inherit" style={{marginRight:'auto', paddingLeft: '15px'}}>Input</Typography>
+          <Typography variant="inherit" style={{marginRight:'auto', paddingLeft: '15px'}}>Output</Typography>
+        </div>
+        <div className="Custom-test-container">
+          <AceEditor
+            className="problem-editor__window"
+            mode="text"
+            theme="solarized_light"
+            onLoad={() => {
+              console.log("Editor Loaded Successful");
+            }}
+            onChange={text => setSourceCode(text)}
+            value={sourceCode}
+            placeholder="This is a placeholder"
+            showGutter={true}
+            showPrintMargin={true}
+            height={"100%"}
+            width={"100%"}
+            fontSize={18}
+          />
+          <AceEditor
+            className="problem-editor__window"
+            mode="text"
+            theme="solarized_light"
+            onLoad={() => {
+              console.log("Editor Loaded Successful");
+            }}
+            onChange={text => setSourceCode(text)}
+            value={sourceCode}
+            placeholder="This is a placeholder"
+            showGutter={true}
+            showPrintMargin={true}
+            height={"100%"}
+            width={"100%"}
+            fontSize={18}
+          />
+        </div>
+      </div>
       <div className="problem-editor__actions">
         <Typography variant="inherit" className={"Submission-status " + submissionStatus}  style={{marginRight: 'auto'}}>{submissionStatus}</Typography>
         <FormGroup row>
@@ -72,8 +113,9 @@ const Editor = () => {
             dispatch(submitCode(sourceCode));
             setOpen(true);
           }}
+          style={{minWidth: '102px'}}
         >
-          Submit
+          {openCustomInput ? "Run" : "Submit"}
         </Button>
       </div>
       <SimpleSnackbar open={open} onClose={handleClose} message={activeMessage} />

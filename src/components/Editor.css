@@ -35,3 +35,29 @@
 .Wrong {
     color: #EF476F;
 }
+
+.Custom-test-section {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+}
+
+.Custom-test-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    background-color: green;
+}
+
+.Custom-test-titlebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    color: white;
+}
+
+.hide {
+    display: none;
+}
