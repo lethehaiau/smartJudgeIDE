@@ -19,8 +19,8 @@ const Editor = () => {
   const [sourceCode, setSourceCode] = useState(
     "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
   );
-  const [stdin, setStdin] = useState();
-  const [stdout, setStdout] = useState();
+  const [stdin, setStdin] = useState("");
+  const [stdout, setStdout] = useState("");
   const [open, setOpen] = useState(false);
   const [openCustomInput, setOpenCustomInput] = useState(false);
   const submissionResult = useSelector(state => state.submission_result);
@@ -33,8 +33,16 @@ const Editor = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setActiveMessage(submissionResult.message);
+    if(submissionResult.status === "Wrong Answer"){
+      setActiveMessage(submissionResult.message);
+    }
   }, [submissionResult]);
+
+  useEffect(() => {
+    if(openCustomInput){
+      setStdout(submissionResult.stdout);
+    }
+  },[submissionResult])
 
   return (
     <div className="problem-editor">
@@ -115,7 +123,7 @@ const Editor = () => {
           size="large"
           onClick={() => {
             console.log(sourceCode);
-            dispatch(submitCode(sourceCode));
+            openCustomInput? dispatch(submitCode(sourceCode, stdin)) : dispatch(submitCode(sourceCode));
             setOpen(true);
           }}
           style={{minWidth: '102px'}}

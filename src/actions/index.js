@@ -1,4 +1,4 @@
-export function submitCode(sourceCode) {
+export function submitCode(sourceCode, argInput) {
   return dispatch => {
     fetch("http://localhost:3000/submissions?base64_encoded=false&wait=true", {
       method: "POST",
@@ -10,7 +10,7 @@ export function submitCode(sourceCode) {
         source_code: sourceCode,
         language_id: "35",
         problem_id: 1,
-        // command_line_arguments: "[[[4.5]]]",
+        command_line_arguments: argInput
         // expected_output: "[0.0]"
       })
     })
@@ -19,7 +19,12 @@ export function submitCode(sourceCode) {
         console.log(result);
         dispatch({
           type: "SUBMIT_CODE",
-          submission_result: { status: result.status.description, message: result.message }
+          submission_result: {
+            status: result.status.description,
+            message: result.message,
+            stdout: result.stdout,
+            stderr: result.stderr
+          }
         });
         return result;
       });
