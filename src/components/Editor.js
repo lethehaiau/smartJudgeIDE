@@ -19,6 +19,8 @@ const Editor = () => {
   const [sourceCode, setSourceCode] = useState(
     "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
   );
+  const [stdin, setStdin] = useState();
+  const [stdout, setStdout] = useState();
   const [open, setOpen] = useState(false);
   const [openCustomInput, setOpenCustomInput] = useState(false);
   const submissionResult = useSelector(state => state.submission_result);
@@ -65,8 +67,8 @@ const Editor = () => {
             onLoad={() => {
               console.log("Editor Loaded Successful");
             }}
-            onChange={text => setSourceCode(text)}
-            value={sourceCode}
+            onChange={text => setStdin(text)}
+            value={stdin}
             placeholder="This is a placeholder"
             showGutter={true}
             showPrintMargin={true}
@@ -81,14 +83,17 @@ const Editor = () => {
             onLoad={() => {
               console.log("Editor Loaded Successful");
             }}
-            onChange={text => setSourceCode(text)}
-            value={sourceCode}
+            readOnly={true}
+            value={stdout}
             placeholder="This is a placeholder"
             showGutter={true}
             showPrintMargin={true}
             height={"100%"}
             width={"100%"}
             fontSize={18}
+            setOptions={{
+              showLineNumbers: false
+            }}
           />
         </div>
       </div>
