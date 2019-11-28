@@ -40,7 +40,8 @@ const Editor = () => {
 
   useEffect(() => {
     if(openCustomInput){
-      setStdout(submissionResult.stdout);
+      //use slice to cut the '[' and ']\n' from the stdout
+      setStdout(submissionResult.stdout.slice(1, -2));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[submissionResult])
@@ -74,7 +75,7 @@ const Editor = () => {
             mode="text"
             theme="solarized_light"
             onLoad={() => {
-              console.log("Editor Loaded Successful");
+              console.log("Stdin Loaded Successful");
             }}
             onChange={text => setStdin(text)}
             value={stdin}
@@ -90,7 +91,7 @@ const Editor = () => {
             mode="text"
             theme="solarized_light"
             onLoad={() => {
-              console.log("Editor Loaded Successful");
+              console.log("Stdout Loaded Successful");
             }}
             readOnly={true}
             value={stdout}
@@ -123,8 +124,13 @@ const Editor = () => {
           color="inherit"
           size="large"
           onClick={() => {
-            console.log(sourceCode);
-            openCustomInput? dispatch(submitCode(sourceCode, stdin)) : dispatch(submitCode(sourceCode));
+            console.log("Executing");
+            //add [[]] to wrap stdin for argument feed single input
+            //1 pair for list of input, 1 pair for list of args
+            if(stdin){
+              var argInput = "[[" + stdin + "]]"
+            }
+            openCustomInput? dispatch(submitCode(sourceCode, argInput)) : dispatch(submitCode(sourceCode));
             setOpen(true);
           }}
           style={{minWidth: '102px'}}
