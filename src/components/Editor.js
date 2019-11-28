@@ -127,11 +127,20 @@ const Editor = () => {
             console.log("Executing");
             //add [[]] to wrap stdin for argument feed single input
             //1 pair for list of input, 1 pair for list of args
-            if(stdin){
-              var argInput = "[[" + stdin + "]]"
+            if(openCustomInput){
+              if(stdin){
+                let argInput = "[[" + stdin + "]]"
+                dispatch(submitCode(sourceCode, argInput))
+              }
+              else{
+                setActiveMessage("Input much not be empty!")
+                setOpen(true);
+              }
             }
-            openCustomInput? dispatch(submitCode(sourceCode, argInput)) : dispatch(submitCode(sourceCode));
-            setOpen(true);
+            else{
+              dispatch(submitCode(sourceCode));
+              setOpen(true);
+            }
           }}
           style={{minWidth: '102px'}}
         >
