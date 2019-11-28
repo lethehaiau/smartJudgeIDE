@@ -42,6 +42,7 @@ const Editor = () => {
     if(openCustomInput){
       setStdout(submissionResult.stdout);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[submissionResult])
 
   return (
@@ -80,7 +81,7 @@ const Editor = () => {
             placeholder="This is a placeholder"
             showGutter={true}
             showPrintMargin={true}
-            height={"100%"}
+            height={"undefined"}
             width={"100%"}
             fontSize={18}
           />
@@ -96,7 +97,7 @@ const Editor = () => {
             placeholder="This is a placeholder"
             showGutter={true}
             showPrintMargin={true}
-            height={"100%"}
+            height={"undefined"}
             width={"100%"}
             fontSize={18}
             setOptions={{
