@@ -1,25 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import "./App.css";
-import Editor from "./components/Editor";
-import Header from "./components/Header";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Practice from "./components/Practice";
+import Admin from "./components/Admin";
 
 
 function App() {
-  const problem = useSelector(state => state.problem);
-  return (
-    <div className="App">
-      <Header />
-      <div className="App-body">
-        <div className="App-problem">
-          <h3>{problem.title}</h3>
-          <div dangerouslySetInnerHTML={{ __html: problem.desc }} />
-        </div>
-        <div style={{ flex: 50}}>
-          <Editor />
-        </div>
+  return(
+    <BrowserRouter>
+      <div>
+        <Switch>
+        <Route path="/practice" component={Practice} exact/>
+        <Route path="/admin" component={Admin}/>
+        {/* <Route path="/contact" component={Contact}/> */}
+        {/* <Route component={Error}/> */}
+        </Switch>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
