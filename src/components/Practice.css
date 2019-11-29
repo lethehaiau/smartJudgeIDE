@@ -1,0 +1,16 @@
+.Practice {
+}
+
+.Practice-body {
+  display: flex;
+}
+
+.Practice-problem {
+  flex: 50;
+  font-size: calc(10px + 2vmin);
+  margin-left: 15px;
+}
+
+.Practice-link {
+  color: #09d3ac;
+}
