@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Practice from "./components/Practice";
 import Admin from "./components/Admin";
+import Error from "./components/Error";
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
         <Route path="/practice" component={Practice} exact/>
         <Route path="/admin" component={Admin}/>
         {/* <Route path="/contact" component={Contact}/> */}
-        {/* <Route component={Error}/> */}
+        <Route component={Error}/>
         </Switch>
       </div>
     </BrowserRouter>
