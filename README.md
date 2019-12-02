@@ -1,4 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
+Link to smartJudge API: https://github.com/lethehaiau/smartJudge
 
 ## Install
 Require [yarn](https://yarnpkg.com/lang/en/docs/install/#debian-stable)
