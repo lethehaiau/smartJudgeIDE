@@ -1,3 +1,6 @@
+# smartJudge IDE
+smartJudge is an online platform where students can practice with introductory programming problems and receive auto generated repair hints when solution is incorrect.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
 Link to smartJudge API: https://github.com/lethehaiau/smartJudge
 
