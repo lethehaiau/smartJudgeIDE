@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Practice from "./components/Practice";
-import Admin from "./components/Admin";
+import Admin from "./components/Admin/Admin";
 import Error from "./components/Error";
 
 
