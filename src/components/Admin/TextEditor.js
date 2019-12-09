@@ -25,7 +25,6 @@ function TextEditor() {
     setTestCases([
       ...testCases,
       {
-        id: testCases.length,
         input: state.testInput,
         output: state.testOutput
       }
@@ -36,6 +35,12 @@ function TextEditor() {
       testOutput: ""
     })
   };
+
+  const handleDeleteTestCase = index => {
+    setTestCases(
+      testCases.filter((item, i) => i !== index)
+    )
+  }
 
   const modules = {
     toolbar: [
@@ -139,13 +144,13 @@ function TextEditor() {
         </div>
         <div style={{ width: "100%" }}>
           <List>
-            {testCases.map(item =>
+            {testCases.map((item, index) =>
               <ListItem>
                 <ListItemText
-                  primary={`Test Case ${item.id}`}
+                  primary={`Test Case ${index}`}
                 />
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteTestCase(index)}>
                       <DeleteIcon />
                     </IconButton>
                   </ListItemSecondaryAction>
