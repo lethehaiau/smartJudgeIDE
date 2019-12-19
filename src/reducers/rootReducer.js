@@ -19,7 +19,8 @@ const initialState = {
   <blockquote class="RichEditor-blockquote" data-block="true" data-editor="9q916" data-offset-key="as6q2-0-0" style="box-sizing: border-box; border-width: 0px 0px 0px 5px; border-top-style: initial; border-right-style: initial; border-bottom-style: initial; border-left-style: solid; border-top-color: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: rgb(238, 238, 238); border-image: initial; font-style: italic; font-variant-ligatures: normal; font-variant-caps: normal; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: 400; font-stretch: inherit; line-height: inherit; font-family: &quot;Hoefler Text&quot;, Georgia, serif; font-size: 16px; margin: 16px 0px; padding: 10px 20px; vertical-align: baseline; color: rgb(102, 102, 102); background-color: rgb(255, 255, 255); letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
     <div class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr" data-offset-key="as6q2-0-0" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline; position: relative; white-space: pre-wrap; direction: ltr; text-align: left;"><span data-offset-key="as6q2-0-0" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline;"><span data-text="true" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline;">Return an integer array representing the coefficients after derivative.&nbsp;</span></span></div>
   </blockquote>`
-  }
+  },
+  problems:{}
 };
 
 function reducer(state = initialState, action) {
@@ -29,6 +30,11 @@ function reducer(state = initialState, action) {
         ...state,
         submission_result: action.submission_result
       };
+    case "LOAD_PROBLEMS":
+      return {
+        ...state,
+        problems: action.problems
+      }
     default:
       return state;
   }

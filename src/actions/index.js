@@ -30,3 +30,38 @@ export function submitCode(sourceCode, argInput) {
       });
   };
 }
+
+export function loadProblems(){
+  return dispatch => {
+    fetch("http://localhost:3000/problems")
+    .then(response => response.json())
+    .then(problems => {
+      console.log(problems);
+      dispatch({
+        type: "LOAD_PROBLEMS",
+        problems: { ...problems }
+      })
+    })
+  }
+}
+
+export function addNewProblem(title, description, args, inputs, outputs, functionName){
+  return dispatch => {
+    fetch("http://localhost:3000/problems", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        arguments: args,
+        inputs: inputs,
+        outputs: outputs,
+        solution_function: functionName
+      })
+    })
+    .then(() => {return dispatch(loadProblems())})
+  }
+}

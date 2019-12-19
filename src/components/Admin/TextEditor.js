@@ -5,6 +5,8 @@ import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import { Typography, Button, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
+import { addNewProblem } from "../../actions/index";
+import { useSelector, useDispatch } from "react-redux";
 
 function TextEditor() {
   const [editorHtml, setEditorHtml] = useState("");
@@ -16,6 +18,9 @@ function TextEditor() {
     testOutput: ""
   });
   const [testCases, setTestCases] = useState([]);
+
+  const problems = useSelector(state => state.problems);
+  const dispatch = useDispatch();
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.value });
@@ -158,6 +163,17 @@ function TextEditor() {
             )}
           </List>
         </div>
+        <Button
+          variant="contained"
+          color="inherit"
+          size="large"
+          onClick={() => {
+            console.log("submit problem");
+            dispatch(addNewProblem(state.title, editorHtml, state.args, "input", "output", state.functionName));
+          }}
+        >
+          Submit
+        </Button>
       </div>
     </div>
   );

@@ -7,10 +7,17 @@
 
 .Practice-problem {
   flex: 50;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
+  font-size: large;
   padding-left: 15px;
+  margin-top: 15px;
 }
 
 .Practice-link {
   color: #09d3ac;
+}
+
+.Problem-selector {
+  min-width: 300px;
+  font-size: 30px;
 }
