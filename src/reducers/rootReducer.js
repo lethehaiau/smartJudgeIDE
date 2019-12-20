@@ -20,7 +20,8 @@ const initialState = {
     <div class="public-DraftStyleDefault-block public-DraftStyleDefault-ltr" data-offset-key="as6q2-0-0" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline; position: relative; white-space: pre-wrap; direction: ltr; text-align: left;"><span data-offset-key="as6q2-0-0" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline;"><span data-text="true" style="box-sizing: border-box; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 16px; margin: 0px; padding: 0px; vertical-align: baseline;">Return an integer array representing the coefficients after derivative.&nbsp;</span></span></div>
   </blockquote>`
   },
-  problems:{}
+  problems:{},
+  current_problem_id: 0
 };
 
 function reducer(state = initialState, action) {
@@ -34,6 +35,11 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         problems: action.problems
+      };
+    case "SELECT_PROBLEM":
+      return {
+        ...state,
+        current_problem_id: action.selected_problem_id
       }
     default:
       return state;

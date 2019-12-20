@@ -16,15 +16,18 @@ import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/theme-twilight";
 
 const Editor = () => {
-  const [sourceCode, setSourceCode] = useState(
-    "def computeDeriv(poly):\n  result = []\n  for e in range(1, len(poly)):\n    result.append(float(poly[e]*e))\n  if result == []:\n    return 0.0\n  else:\n      return result\n"
-  );
+  
   const [stdin, setStdin] = useState("");
   const [stdout, setStdout] = useState("");
   const [open, setOpen] = useState(false);
   const [openCustomInput, setOpenCustomInput] = useState(false);
   const submissionResult = useSelector(state => state.submission_result);
   const submissionStatus = useSelector(state => state.submission_result.status);
+  const current_problem_id = useSelector(state => state.current_problem_id);
+  const problems = useSelector(state => state.problems);
+  const [sourceCode, setSourceCode] = useState(
+    `def ${problems[current_problem_id] ? problems[current_problem_id].functionName : "solution"}(${problems[current_problem_id] ? problems[current_problem_id].args : ""}):\n\t#  Write your code here!\n`
+  );
   const [activeMessage, setActiveMessage] = useState();
   const handleClose = () => {
     setOpen(false);
@@ -45,6 +48,10 @@ const Editor = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[submissionResult])
+  console.log(problems);
+  useEffect(() => {
+    setSourceCode(`def ${problems[current_problem_id] ? problems[current_problem_id].solution_function : "solution"}(${problems[current_problem_id] ? problems[current_problem_id].arguments : ""}):\n\t#  Write your code here!\n`);
+  }, [problems, current_problem_id]);
 
   return (
     <div className="problem-editor">
@@ -63,6 +70,7 @@ const Editor = () => {
         height={"100%"}
         width={"undefined"}
         fontSize={18}
+        tabSize={2}
       />
       <div className={"Custom-test-section " + (!openCustomInput && "hide")}>
         <div className="Custom-test-titlebar">

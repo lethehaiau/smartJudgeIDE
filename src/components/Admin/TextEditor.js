@@ -19,7 +19,6 @@ function TextEditor() {
   });
   const [testCases, setTestCases] = useState([]);
 
-  const problems = useSelector(state => state.problems);
   const dispatch = useDispatch();
 
   const handleChange = name => event => {

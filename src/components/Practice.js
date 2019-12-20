@@ -14,6 +14,7 @@ function Practice() {
 
   const handleChange = event => {
     setProblemIndex(event.target.value);
+    dispatch({type: "SELECT_PROBLEM", selected_problem_id: event.target.value});
   };
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function Practice() {
             style={{marginTop: '15px'}}
           />
         </div>
-        <div style={{ flex: 50, minHeight: '700px' }}>
+        <div style={{ flex: 50, height: '700px' }}>
           <Editor />
         </div>
       </div>
