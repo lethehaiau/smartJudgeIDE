@@ -3,10 +3,18 @@ import TextField from "@material-ui/core/TextField";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import { Typography, Button, List, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
+import {
+  Typography,
+  Button,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { addNewProblem } from "../../actions/index";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function TextEditor() {
   const [editorHtml, setEditorHtml] = useState("");
@@ -17,7 +25,8 @@ function TextEditor() {
     testInput: "",
     testOutput: ""
   });
-  const [testCases, setTestCases] = useState([]);
+  const [testCasesInput, setTestCasesInput] = useState([]);
+  const [testCasesOutput, setTestCasesOutput] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -26,25 +35,19 @@ function TextEditor() {
   };
 
   const handleAddTestCase = () => {
-    setTestCases([
-      ...testCases,
-      {
-        input: state.testInput,
-        output: state.testOutput
-      }
-    ]);
+    setTestCasesInput([...testCasesInput, state.testInput.split(" ")]);
+    setTestCasesOutput([...testCasesOutput, state.testOutput.split(" ")]);
     setState({
       ...state,
       testInput: "",
       testOutput: ""
-    })
+    });
   };
 
   const handleDeleteTestCase = index => {
-    setTestCases(
-      testCases.filter((item, i) => i !== index)
-    )
-  }
+    setTestCasesInput(testCasesInput.filter((item, i) => i !== index));
+    setTestCasesOutput(testCasesOutput.filter((item, i) => i !== index));
+  };
 
   const modules = {
     toolbar: [
@@ -148,18 +151,20 @@ function TextEditor() {
         </div>
         <div style={{ width: "100%" }}>
           <List>
-            {testCases.map((item, index) =>
+            {testCasesInput.map((item, index) => (
               <ListItem>
-                <ListItemText
-                  primary={`Test Case ${index}`}
-                />
+                <ListItemText primary={`Test Case ${index}`} />
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteTestCase(index)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </ListItemSecondaryAction>
+                  <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={() => handleDeleteTestCase(index)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
               </ListItem>
-            )}
+            ))}
           </List>
         </div>
         <Button
@@ -168,11 +173,21 @@ function TextEditor() {
           size="large"
           onClick={() => {
             console.log("submit problem");
-            dispatch(addNewProblem(state.title, editorHtml, state.args, "input", "output", state.functionName));
+            dispatch(
+              addNewProblem(
+                state.title,
+                editorHtml,
+                state.args,
+                testCasesInput,
+                testCasesOutput,
+                state.functionName
+              )
+            );
           }}
         >
           Submit
         </Button>
+        <div>{JSON.stringify(testCasesInput, null, 2)}</div>
       </div>
     </div>
   );
