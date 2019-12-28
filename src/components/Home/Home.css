@@ -1,0 +1,27 @@
+.Home {
+  height: 100vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fdf6e3;
+  display: flex;
+}
+
+.Main {
+  /* background-color: cadetblue; */
+  height: 30vh;
+  width: 20vw;
+  margin-top: 30vh;
+  color: #272822;
+}
+
+.Main-Header {
+  font-size: 3rem;
+  font-weight: 700;
+  max-width: 100px;
+  margin-bottom: 1rem;
+}
+
+.Main-Slogan {
+  margin-bottom: 1rem;
+}

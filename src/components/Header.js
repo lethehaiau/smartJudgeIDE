@@ -6,8 +6,14 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import "./Header.css";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
+  const history = useHistory();
+
+  const handleClick = () => {
+    history.push("/");
+  };
   return (
     <div className="Header">
       <Appbar position="static" color="inherit">
@@ -20,7 +26,11 @@ const Header = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className="Header-title">
+          <Typography
+            variant="h6"
+            className="Header-title"
+            onClick={handleClick}
+          >
             Smart Judge
           </Typography>
           <Button color="inherit">Login</Button>
