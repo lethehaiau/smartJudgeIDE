@@ -44,7 +44,7 @@ const Editor = () => {
   useEffect(() => {
     if(openCustomInput){
       //use slice to cut the '[' and ']\n' from the stdout
-      setStdout(submissionResult.stdout.slice(1, -2));
+      setStdout(submissionResult.stdout.slice(1, -1));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[submissionResult])
