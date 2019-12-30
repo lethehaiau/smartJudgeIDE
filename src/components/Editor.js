@@ -138,7 +138,7 @@ const Editor = () => {
             if(openCustomInput){
               if(stdin){
                 let argInput = "[[" + stdin + "]]"
-                dispatch(submitCode(sourceCode, argInput))
+                dispatch(submitCode(sourceCode, problems[current_problem_id].id, argInput))
               }
               else{
                 setActiveMessage("Input much not be empty!")
@@ -146,7 +146,7 @@ const Editor = () => {
               }
             }
             else{
-              dispatch(submitCode(sourceCode));
+              dispatch(submitCode(sourceCode, problems[current_problem_id].id));
               setOpen(true);
             }
           }}

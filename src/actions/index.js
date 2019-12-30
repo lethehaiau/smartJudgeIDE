@@ -1,4 +1,4 @@
-export function submitCode(sourceCode, argInput) {
+export function submitCode(sourceCode, problemID, argInput) {
   return dispatch => {
     fetch("http://localhost:3000/submissions?base64_encoded=false&wait=true", {
       method: "POST",
@@ -9,7 +9,7 @@ export function submitCode(sourceCode, argInput) {
       body: JSON.stringify({
         source_code: sourceCode,
         language_id: "35",
-        problem_id: 1,
+        problem_id: problemID,
         command_line_arguments: argInput
         // expected_output: "[0.0]"
       })

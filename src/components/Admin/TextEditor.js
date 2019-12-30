@@ -35,8 +35,8 @@ function TextEditor() {
   };
 
   const handleAddTestCase = () => {
-    setTestCasesInput([...testCasesInput, state.testInput.split(" ")]);
-    setTestCasesOutput([...testCasesOutput, state.testOutput.split(" ")]);
+    setTestCasesInput([...testCasesInput, "[" + state.testInput + "]"]);
+    setTestCasesOutput([...testCasesOutput, state.testOutput]);
     setState({
       ...state,
       testInput: "",
@@ -178,8 +178,8 @@ function TextEditor() {
                 state.title,
                 editorHtml,
                 state.args,
-                testCasesInput,
-                testCasesOutput,
+                JSON.stringify(testCasesInput, null, 2).replace(/[^\[\],.\w]/gi, '').replace(/[\n\r]/g, ''),
+                JSON.stringify(testCasesOutput, null, 2).replace(/[^\[\],.\w]/gi, '').replace(/[\n\r]/g, ''),
                 state.functionName
               )
             );
@@ -187,7 +187,7 @@ function TextEditor() {
         >
           Submit
         </Button>
-        <div>{JSON.stringify(testCasesInput, null, 2)}</div>
+        {/* <div>{JSON.stringify(testCasesInput, null, 2)}</div> */}
       </div>
     </div>
   );
